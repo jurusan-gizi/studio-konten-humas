@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Studio Konten Humas</title>
+<meta name="description" content="Pembuat konten media sosial sesuai pedoman Ditjen SDM Kesehatan untuk Poltekkes Kemenkes Makassar">
+<meta name="theme-color" content="#0B6E79">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="assets/icon-192.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+  <aside class="side" id="side">
+    <div class="brand">
+      <img src="assets/logo-mark.png" alt="">
+      <div><b>Studio Konten Humas</b><small>Poltekkes Kemenkes Makassar</small></div>
+    </div>
+    <nav class="nav" aria-label="Menu utama">
+      <a href="#dashboard" data-view="dashboard"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 3h8v10H3zm10 0h8v6h-8zM3 15h8v6H3zm10-4h8v10h-8z"/></svg>Dashboard</a>
+      <a href="#buat" data-view="buat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>Buat Desain</a>
+      <a href="#tersimpan" data-view="tersimpan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h10"/></svg>Desain Tersimpan</a>
+      <a href="#kalender" data-view="kalender"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Kalender Konten</a>
+      <a href="#pengaturan" data-view="pengaturan"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.4 13a7.5 7.5 0 0 0 0-2l2.1-1.6-2-3.4-2.5 1a7 7 0 0 0-1.7-1l-.4-2.6h-4l-.4 2.6a7 7 0 0 0-1.7 1l-2.5-1-2 3.4L4.6 11a7.5 7.5 0 0 0 0 2l-2.1 1.6 2 3.4 2.5-1a7 7 0 0 0 1.7 1l.4 2.6h4l.4-2.6a7 7 0 0 0 1.7-1l2.5 1 2-3.4zM12 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z"/></svg>Pengaturan</a>
+    </nav>
+    <div class="side-foot">
+      <div class="conn" id="conn"><b><span class="dot" id="connDot"></span><span id="connTitle">Belum terhubung</span></b><span id="connMsg">Isi alamat server dan PIN di menu Pengaturan.</span></div>
+      <button class="btn" id="btnInstall" type="button" hidden>Pasang aplikasi</button>
+      <div class="credit">Dikembangkan oleh Manjilala · Poltekkes Kemenkes Makassar. Mengacu SE Sesditjen SDM Kesehatan No. HK.02.03/F.I/9394/2026.</div>
+    </div>
+  </aside>
+  <div class="scrim" id="scrim" hidden></div>
+
+  <div class="main">
+    <header class="topbar">
+      <button class="btn ghost menu-btn" id="menuBtn" type="button" aria-label="Buka menu"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+      <h1 id="pageTitle">Dashboard</h1>
+    </header>
+
+    <div class="content">
+      <div class="alert err" id="globalAlert" hidden></div>
+
+      <!-- DASHBOARD -->
+      <section data-page="dashboard" hidden>
+        <div class="stats" id="stats"></div>
+        <div class="grid2" style="margin-top:20px">
+          <div class="card">
+            <div class="card-head"><h2>Desain terbaru</h2><a class="btn primary" href="#buat" data-new>+ Desain Baru</a></div>
+            <div class="rows" id="recentList"></div>
+          </div>
+          <div class="card">
+            <div class="card-head"><h2>Jadwal unggah 14 hari ke depan</h2></div>
+            <div class="rows compact" id="upcomingList"></div>
+            <p class="hint" id="monthRecap" style="text-align:left;margin-top:14px"></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- BUAT DESAIN -->
+      <section data-page="buat" hidden>
+        <div class="card">
+          <div class="postbar">
+            <div class="field"><label for="pJudul">Judul konten (untuk formulir Humas)</label><input type="text" id="pJudul" maxlength="120" placeholder="Contoh: Pendampingan Balita Bermasalah Gizi di Kabupaten Bone"></div>
+            <div class="field"><label for="pJadwal">Rencana tanggal unggah</label><input type="date" id="pJadwal"></div>
+            <div class="acts">
+              <span class="pill st-Draf" id="pStatus">Draf baru</span>
+              <button class="btn" id="btnSaveDraft" type="button">Simpan draf</button>
+              <button class="btn primary" id="btnSend" type="button">Kirim ke Humas</button>
+            </div>
+          </div>
+        </div>
+        <div class="editor" style="margin-top:20px">
+          <div class="preview">
+            <canvas id="cv" width="1080" height="1350" aria-label="Pratinjau slide"></canvas>
+            <div class="slides" id="slideStrip"></div>
+            <div class="slide-tools">
+              <button class="btn sm" id="btnDup" type="button">Gandakan slide</button>
+              <button class="btn sm" id="btnLeft" type="button" aria-label="Geser slide ke kiri">◀</button>
+              <button class="btn sm" id="btnRight" type="button" aria-label="Geser slide ke kanan">▶</button>
+              <button class="btn sm danger" id="btnDelSlide" type="button">Hapus slide</button>
+              <button class="btn sm" id="btnDownload" type="button">Unduh semua slide (JPG)</button>
+            </div>
+            <p class="hint" id="hint"></p>
+            <p class="toast" id="toast" role="status"></p>
+          </div>
+
+          <div class="card panel">
+            <section>
+              <span class="step">Langkah 1</span><h2>Pilih bingkai</h2>
+              <div class="tpls" id="tplSeg">
+                <button type="button" data-tpl="t1"><img alt="" src="assets/t1.jpg">Gelombang</button>
+                <button type="button" data-tpl="t2"><img alt="" src="assets/t2.jpg">Bingkai</button>
+                <button type="button" data-tpl="t3"><img alt="" src="assets/t3.jpg">Daun</button>
+                <button type="button" data-tpl="t4"><img alt="" src="assets/t4.jpg">Arus</button>
+              </div>
+            </section>
+            <section>
+              <span class="step">Langkah 2</span><h2>Pilih layout</h2>
+              <div class="seg three" id="kindSeg">
+                <button type="button" data-kind="info">Informasi<small>Judul, foto, keterangan</small></button>
+                <button type="button" data-kind="foto">Foto penuh<small>Foto dominan</small></button>
+                <button type="button" data-kind="angka">Angka penting<small>Satu capaian besar</small></button>
+                <button type="button" data-kind="pengumuman">Pengumuman<small>Teks, tanpa foto</small></button>
+                <button type="button" data-kind="ucapan">Ucapan<small>Hari besar, foto opsional</small></button>
+              </div>
+            </section>
+            <section id="photoSec">
+              <span class="step">Langkah 3</span><h2 id="photoTitle">Foto</h2>
+              <div class="seg four" id="laySeg">
+                <button type="button" data-lay="1">1 foto</button><button type="button" data-lay="2">2</button><button type="button" data-lay="3">3</button><button type="button" data-lay="4">4</button>
+              </div>
+              <div class="slots" id="slots"></div>
+              <div class="photo-tools" id="photoTools" hidden>
+                <label for="zoom">Perbesar</label><input type="range" id="zoom" min="1" max="3" step="0.01" value="1">
+                <button type="button" class="btn sm" id="btnReplace">Ganti</button>
+                <button type="button" class="btn sm" id="btnCenter">Ke tengah</button>
+                <button type="button" class="btn sm" id="btnRemove">Hapus</button>
+              </div>
+              <input type="file" id="file" accept="image/*" multiple hidden>
+            </section>
+            <section>
+              <span class="step" id="textStep">Langkah 4</span><h2>Tulis teks slide</h2>
+              <div class="field"><label for="tLabel" id="lLabel">Label kategori</label><input type="text" id="tLabel" maxlength="30"></div>
+              <div class="row2">
+                <div class="field"><label for="tJ1" id="lJ1">Judul baris 1</label><input type="text" id="tJ1" maxlength="26"></div>
+                <div class="field"><label for="tJ2" id="lJ2">Judul baris 2</label><input type="text" id="tJ2" maxlength="26"></div>
+              </div>
+              <div class="row2" id="numRow" hidden>
+                <div class="field"><label for="tAngka">Angka</label><input type="text" id="tAngka" maxlength="8" inputmode="decimal"></div>
+                <div class="field"><label for="tSatuan">Satuan</label><input type="text" id="tSatuan" maxlength="24"></div>
+              </div>
+              <div class="field"><label for="tBody" id="lBody">Keterangan</label><textarea id="tBody"></textarea><span class="count" id="bodyCount"></span></div>
+              <div class="alert warn" id="warn" hidden></div>
+            </section>
+            <section>
+              <span class="step" id="capStep">Langkah 5</span><h2>Caption Instagram</h2>
+              <div class="seg" id="toneSeg">
+                <button type="button" data-tone="informatif">Informatif<small>Kabar kegiatan, pengumuman</small></button>
+                <button type="button" data-tone="edukatif">Edukatif<small>Pengetahuan kesehatan</small></button>
+                <button type="button" data-tone="promotif">Promotif<small>Ajakan daftar, layanan</small></button>
+                <button type="button" data-tone="inspiratif">Inspiratif<small>Prestasi, kisah baik</small></button>
+              </div>
+              <div class="field"><label for="cInfo">Info tambahan (opsional)</label><textarea id="cInfo" maxlength="500" placeholder="Tanggal, tempat, siapa yang terlibat, tautan pendaftaran"></textarea></div>
+              <div class="field"><label for="cTags">Tagar wajib</label><input type="text" id="cTags" maxlength="120"></div>
+              <button type="button" class="btn primary" id="btnCap">Buat caption</button>
+              <div class="field"><label for="cOut">Caption (bisa diedit)</label><textarea id="cOut" rows="10" placeholder="Caption akan muncul di sini"></textarea><span class="count" id="capCount"></span></div>
+              <div><button type="button" class="btn" id="btnCopy">Salin caption</button></div>
+              <p class="hint" id="capNote" role="status" style="text-align:left"></p>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <!-- DESAIN TERSIMPAN -->
+      <section data-page="tersimpan" hidden>
+        <div class="card">
+          <div class="toolbar">
+            <input type="search" id="q" placeholder="Cari judul atau caption">
+            <a class="btn primary" href="#buat" data-new>+ Desain Baru</a>
+          </div>
+          <div class="chips" id="statusChips" style="margin:14px 0"></div>
+          <div class="rows" id="savedList"></div>
+        </div>
+      </section>
+
+      <!-- KALENDER -->
+      <section data-page="kalender" hidden>
+        <div class="card">
+          <div class="card-head">
+            <h2 id="calTitle"></h2>
+            <div class="toolbar"><button class="btn sm" id="calPrev" type="button">◀ Bulan lalu</button><button class="btn sm" id="calToday" type="button">Bulan ini</button><button class="btn sm" id="calNext" type="button">Bulan depan ▶</button></div>
+          </div>
+          <div class="cal" id="cal"></div>
+        </div>
+        <div class="card" style="margin-top:20px">
+          <div class="card-head"><h2>Rencana unggah bulan ini</h2></div>
+          <div class="rows" id="calList"></div>
+        </div>
+      </section>
+
+      <!-- PENGATURAN -->
+      <section data-page="pengaturan" hidden>
+        <div class="card" style="max-width:720px">
+          <form id="setForm" class="panel">
+            <div class="field"><label for="sUrl">Alamat server (URL Web app Apps Script)</label><input type="url" id="sUrl" placeholder="https://script.google.com/macros/s/.../exec" required><small>Didapat setelah Deploy → Web app di Apps Script.</small></div>
+            <div class="field"><label for="sPin">PIN</label><input type="password" id="sPin" autocomplete="current-password" required><small>Sama dengan PIN di CONFIG Code.gs. Disimpan hanya di perangkat ini.</small></div>
+            <div class="field"><label for="sForm">Tautan Google Form Humas</label><input type="url" id="sForm"><small>Formulir Permintaan Publikasi Informasi Poltekkes Kemenkes Makassar.</small></div>
+            <div class="field"><label for="sTags">Tagar wajib bawaan</label><input type="text" id="sTags"></div>
+            <div class="toolbar"><button class="btn primary" type="submit">Simpan dan tes koneksi</button><span class="hint" id="setMsg" role="status"></span></div>
+          </form>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<!-- dialog kirim ke humas -->
+<dialog id="dlgSend">
+  <div class="dlg">
+    <h2>Kirim ke Humas</h2>
+    <p>Ikuti langkah ini, lalu kirim lewat Formulir Permintaan Publikasi Informasi.</p>
+    <ol class="steps">
+      <li id="s1"><div class="box"><b>Simpan gambar final</b><span class="hint" style="text-align:left" id="s1Msg">Semua slide disimpan ke folder Drive "Hasil" dan bisa diunduh ke perangkat.</span><div class="toolbar"><button class="btn sm primary" id="sExport" type="button">Simpan ke Drive</button><button class="btn sm" id="sDownload" type="button">Unduh ke perangkat</button><a class="btn sm" id="sFolder" target="_blank" rel="noopener" hidden>Buka folder</a></div></div></li>
+      <li id="s2"><div class="box"><b>Salin judul</b><div class="preview-text" id="sJudul"></div><div><button class="btn sm" id="sCopyJudul" type="button">Salin judul</button></div></div></li>
+      <li id="s3"><div class="box"><b>Salin caption</b><span class="hint" style="text-align:left">Kolom caption di formulir hanya satu baris, jadi paragraf otomatis digabung.</span><div class="preview-text" id="sCaption"></div><div><button class="btn sm" id="sCopyCap" type="button">Salin caption</button></div></div></li>
+      <li id="s4"><div class="box"><b>Buka formulir dan isi</b><span class="hint" style="text-align:left">Tempel judul dan caption. Di kolom unggah, pilih <b>Add file → My Drive</b> lalu buka folder Studio Konten Humas → Hasil, atau pilih file yang sudah diunduh.</span><div><a class="btn sm primary" id="sForm" target="_blank" rel="noopener">Buka formulir Humas</a></div></div></li>
+      <li id="s5"><div class="box"><b>Tandai sudah terkirim</b><span class="hint" style="text-align:left">Status berubah menjadi "Terkirim ke Humas" dengan tanggal hari ini.</span><div><button class="btn sm primary" id="sDone" type="button">Sudah saya kirim</button></div></div></li>
+    </ol>
+    <p class="toast" id="sToast" role="status"></p>
+    <div class="acts"><button class="btn" id="sClose" type="button">Tutup</button></div>
+  </div>
+</dialog>
+
+<!-- dialog status -->
+<dialog id="dlgStatus">
+  <form class="dlg" id="statusForm" method="dialog">
+    <h2>Ubah status</h2>
+    <p id="stTitle"></p>
+    <div class="field"><label for="stSel">Status</label><select id="stSel"></select></div>
+    <div class="field" id="stLinkF"><label for="stLink">Tautan postingan Instagram (jika sudah tayang)</label><input type="url" id="stLink" placeholder="https://www.instagram.com/p/..."></div>
+    <div class="field"><label for="stNote">Catatan (misalnya permintaan revisi dari Humas)</label><textarea id="stNote" rows="3"></textarea></div>
+    <div class="acts"><button class="btn" value="cancel" type="button" id="stCancel">Batal</button><button class="btn primary" type="submit">Simpan status</button></div>
+  </form>
+</dialog>
+
+<!-- dialog konfirmasi -->
+<dialog id="dlgConfirm">
+  <div class="dlg">
+    <h2 id="cfTitle"></h2>
+    <p id="cfText"></p>
+    <div class="acts"><button class="btn" id="cfNo" type="button">Batal</button><button class="btn primary" id="cfYes" type="button">Ya</button></div>
+  </div>
+</dialog>
+
+<script src="editor-core.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
